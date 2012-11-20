@@ -7,6 +7,7 @@ class Dungeon : Graveyard{
 private:
 	
 public:
+	Dungeon();
 
 };
 

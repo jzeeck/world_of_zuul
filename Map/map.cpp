@@ -12,7 +12,7 @@ Map::Map() {
 	dungeon = d_tile_ptr;
 	cathedral = c_tile_ptr;
 	field = tile_ptr;	
-	init_field();
+	init_field();	
 	init_dungeon();
 	init_cathedral();
 }

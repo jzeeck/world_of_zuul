@@ -7,6 +7,7 @@ class Graveyard : Tile{
 private:
 	
 public:
+	Graveyard();
 
 };
 

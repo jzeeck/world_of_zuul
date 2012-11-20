@@ -7,6 +7,7 @@ private:
 	Tile* west;
 	Tile* east;
 public:
+	Tile();
 	
 };
 

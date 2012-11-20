@@ -7,6 +7,7 @@ class Cathedral : Tile{
 private:
 
 public:
+	Cathedral();
 	
 };
 
