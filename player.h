@@ -2,12 +2,15 @@
 #define PLAYER_H_
 
 #include "Items/item.h"
+#include "Map/Tiles/tile.h"
 #include <string>
 
 class Player {
 private:
 	std::string l_name;
 	const static unsigned int max_number_of_items = 8;
+
+	Tile* current_tile;
 
 	int l_strength;
 	int l_dexterity;
