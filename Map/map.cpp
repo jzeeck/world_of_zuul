@@ -4,11 +4,7 @@
 #define CATHEDRAL_SQUARES 4
 #define DUNGEON_SQUARES 7
 
-Map::Map() {
-	dungeon = new Dungeon[DUNGEON_SQUARES];
-	cathedral = new Cathedral[CATHEDRAL_SQUARES];
-	field = new Tile[MAP_DIMENSION*MAP_DIMENSION];
-
+Map::Map() : dungeon(new Dungeon[DUNGEON_SQUARES]), cathedral(new Cathedral[CATHEDRAL_SQUARES]), field(new Tile[MAP_DIMENSION*MAP_DIMENSION]){
 	init_field();	
 	link_field();
 	init_dungeon();
@@ -19,6 +15,9 @@ Map::~Map() {
 	delete[] dungeon;
 	delete[] cathedral;
 	delete[] field;
+}
+Tile* Map::get_starting_position(void) const {
+	return field+(MAP_DIMENSION*MAP_DIMENSION)-1;
 }
 
 void Map::init_field(void) {
@@ -51,7 +50,7 @@ void Map::init_field(void) {
 				std::cout<<"Init a Tile at index "<<index<<std::endl;
 			#endif
 
-			*(field_ptr + index) = Tile();
+			*(field_ptr + index) = Tile(index);
 		}
 	}
 
@@ -67,7 +66,7 @@ void Map::init_field(void) {
 				std::cout<<"Init a Tile at index "<<index<<std::endl;
 			#endif
 
-			*(field_ptr+index) = Swamp();
+			*(field_ptr+index) = Swamp(index);
 		}
 	}
 	#ifdef DEBUGG
@@ -82,7 +81,7 @@ void Map::init_field(void) {
 				std::cout<<"Init a Tile at index "<<index<<std::endl;
 			#endif
 
-			*(field_ptr+index) = Graveyard();
+			*(field_ptr+index) = Graveyard(index);
 		}
 	}
 	#ifdef DEBUGG
@@ -171,31 +170,45 @@ void Map::init_cathedral(void) {
 void Map::link_map_together() {
 
 }
-void Map::print(void) {
+Dungeon* Map::get_dungeon() const{
+	return dungeon;
+}
 
-	Tile* tile_ptr = field;
+Cathedral* Map::get_cathedral() const{
+	return cathedral;
+}
+
+Tile* Map::get_field() const {
+	return field;
+}
+
+std::ostream& operator<<(std::ostream& stream, const Map& map) {
+
+	Tile* tile_ptr = map.get_field();
 
 	std::cout<<"Field:"<<std::endl;
 	for(int i = 0;i<MAP_DIMENSION;++i){
 		for(int j = 0;j<MAP_DIMENSION;++j){
-			std::cout<<'|'<<*(tile_ptr+ (i*6)+j)<<'|';
+			std::cout<<'|'<<*(tile_ptr+(i*6)+j)<<'|';
 		}
 		std::cout<<std::endl;
 	}
 	
-	Cathedral* cathedral_ptr = cathedral;
+	Cathedral* cathedral_ptr = map.get_cathedral();
 
 	std::cout<<"Cathedral:"<<std::endl;
 	std::cout<<"   "<<'|'<<*(cathedral_ptr+1)<<'|'<<std::endl;
 	std::cout<<'|'<<*(cathedral_ptr)<<'|'<<'|'<<*(cathedral_ptr+2)<<'|'<<std::endl;
 	std::cout<<"   "<<'|'<<*(cathedral_ptr+3)<<'|'<<std::endl;
 
-	Dungeon* dungeon_ptr = dungeon;
+	Dungeon* dungeon_ptr = map.get_dungeon();
 
 	std::cout<<"Dungeon:"<<std::endl;
 	std::cout<<"   "<<"   "<<'|'<<*(dungeon_ptr+3)<<'|'<<std::endl;
 	std::cout<<'|'<<*(dungeon_ptr)<<'|'<<'|'<<*(dungeon_ptr+1)<<'|'<<'|'<<*(dungeon_ptr+2)<<'|';
 	std::cout<<'|'<<*(dungeon_ptr+4)<<'|'<<'|'<<*(dungeon_ptr+6)<<'|'<<std::endl;
 	std::cout<<"   "<<"   "<<"   "<<'|'<<*(dungeon_ptr+5)<<'|'<<std::endl;
+
+	return stream;
 
 }

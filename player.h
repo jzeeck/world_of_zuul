@@ -31,7 +31,9 @@ public:
 	int get_max_number_of_items();
 	void set_name(std::string var);
 	Player();
+	Player(Tile*);
 	~Player();
+	bool move(std::string);
 };
 
 #endif /* PLAYER_H_ */

@@ -15,20 +15,28 @@
 
 class Map {
 private:
-	Dungeon* dungeon;//[DUNGEON_SQUARES];
-	Cathedral* cathedral;//[CATHEDRAL_SQUARES];
-	Tile* field;//[MAP_DIMENSION*MAP_DIMENSION];
+	Dungeon* const dungeon;//;//[DUNGEON_SQUARES];
+	Cathedral* const cathedral;//[CATHEDRAL_SQUARES];
+	Tile* const field;//[MAP_DIMENSION*MAP_DIMENSION];
 
 	void init_field(void);
 	void link_field(void);
 	void init_dungeon(void);
 	void init_cathedral(void);
 	void link_map_together(void);
+
 public:
 	Map();
 	~Map();
 
-	void print(void);
+	//getters
+	Dungeon* get_dungeon(void) const;
+	Cathedral* get_cathedral(void) const;
+	Tile* get_field(void) const;
+
+	Tile* get_starting_position(void) const;
+
+	friend std::ostream& operator<<(std::ostream& stream, const Map& map);
 };
 
 
