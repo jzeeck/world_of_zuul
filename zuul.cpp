@@ -31,8 +31,6 @@ int Zuul::run(int argc, char** argv) {
 	get_adventurer_name();
 	print_help_msg(g_commands);
 
-	map->print();
-
 	while(!g_quit) {
 
 		read_command();
@@ -48,13 +46,15 @@ void Zuul::print_welcome_msg(void) const{
 void Zuul::get_adventurer_name(void) {
 	std::cout << "Please enter the name of your adventurer!" << std::endl;
 	std::cin.getline (g_input, MAX_BYTES);
-	g_player = new Player();
+	g_player = new Player(map->get_starting_position());
 	g_player->set_name(g_input);
-
 }
 
-void Zuul::print_help_msg(std::vector<std::string> commands){
+void Zuul::print_help_msg(std::vector<std::string>& commands){
 	print_valid_commands();
+}
+void Zuul::print_map(std::vector<std::string>& commands) {
+	std::cout<<(*map);
 }
 
 void Zuul::print_valid_commands(void) const{
@@ -86,20 +86,31 @@ void Zuul::init_map(void) {
 	map = new Map();
 }
 void Zuul::init_program_commands(void) {
-	std::string s = "quit";
+	std::string s = "go";
+	g_command_vector.push_back(new GameCommand<void (Zuul::*)(std::vector<std::string>& commands), Zuul*>(s, &Zuul::go, this));
+	s = "quit";
 	//new GameCommand<void (Zuul::*)(std::vector<std::string> commands), Zuul*> command(s, &Zuul::quit, this);
 	//g_command_vector.push_back(new (Zuul::*)(std::vector<std::string> commands), Zuul*> (s, &Zuul::quit, this));
-	g_command_vector.push_back(new GameCommand<void (Zuul::*)(std::vector<std::string> commands), Zuul*>(s, &Zuul::quit, this));
+	g_command_vector.push_back(new GameCommand<void (Zuul::*)(std::vector<std::string>& commands), Zuul*>(s, &Zuul::quit, this));
 	s = "help";
 	//g_command_vector.push_back(GameCommand<void (Zuul::*)(std::vector<std::string> commands)>(s, &Zuul::print_help_msg));
-	g_command_vector.push_back(new GameCommand<void (Zuul::*)(std::vector<std::string> commands), Zuul*>(s, &Zuul::print_help_msg, this));
-	
+	g_command_vector.push_back(new GameCommand<void (Zuul::*)(std::vector<std::string>& commands), Zuul*>(s, &Zuul::print_help_msg, this));
+	s = "map";
+	g_command_vector.push_back(new GameCommand<void (Zuul::*)(std::vector<std::string>& commands), Zuul*>(s, &Zuul::print_map, this));
 	/*g_commad_map.insert(std::pair<std::string, void (Zuul::*)(std::vector<std::string> commands)>("quit", &Zuul::quit));
 	g_commad_map.insert(std::pair<std::string, 
 		void (Zuul::*)(std::vector<std::string> commands)>("help", &Zuul::print_help_msg));*/
 	
 }
-void Zuul::quit(std::vector<std::string> commands) {
+void Zuul::go(std::vector<std::string>& commands) {
+	if(commands.size() != 2){
+		print_input_error_msg();
+	}
+	if!(g_player->move(commands[1]))
+		//print error
+		;
+}
+void Zuul::quit(std::vector<std::string>& commands) {
 	g_quit = true;
 }
 void Zuul::exec_command(void) {
@@ -172,6 +183,7 @@ std::vector<std::string> Zuul::split(const std::string& strValue, char separator
 		vecstrResult.push_back(strValue.substr(startpos, endpos-startpos));
 	return vecstrResult;
 }
+
 void Zuul::print_input_error_msg(void) const {
 	std::cout <<'"'<< g_input <<'"' << ", was not a valid input!"<<std::endl;
 }

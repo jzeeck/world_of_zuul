@@ -1,5 +1,7 @@
 #include "graveyard.h"
 
-Graveyard::Graveyard() {}
+Graveyard::Graveyard() :Tile(){}
+
+Graveyard::Graveyard(int index) :Tile(index){}
 
 Graveyard::~Graveyard() {}

@@ -8,6 +8,7 @@ private:
 	
 public:
 	Graveyard();
+	Graveyard(int);
 	~Graveyard();
 
 };

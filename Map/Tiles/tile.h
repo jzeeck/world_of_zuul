@@ -4,9 +4,12 @@
 #include <vector>
 #include "../../NPC/npc.h"
 #include <iostream>
+#include <map>
+#include <utility>
 
 class Tile {
 private:
+	int number;
 	Tile* north;
 	Tile* south;
 	Tile* west;
@@ -15,8 +18,11 @@ private:
 	bool l_isExplored;
 
 	std::vector<NPC> v;
+	static std::map<std::string, Tile* (Tile::*)() const> directions;
+	void init_directions(void);
 public:
 	Tile();
+	Tile(int);
 	//setters
 	void set_north(Tile& t);
 	void set_south(Tile& t);
@@ -27,7 +33,9 @@ public:
 	Tile* get_south(void) const;
 	Tile* get_west(void) const;
 	Tile* get_east(void) const;
+	Tile* get_direction(std::string) const;
 	bool isExplored(void) const;
+	void explore(void);
 	//print
 	friend std::ostream& operator<<(std::ostream& stream, const Tile& tile);
 };

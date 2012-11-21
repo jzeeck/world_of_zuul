@@ -7,16 +7,20 @@
 #include <utility>
 #include "Commands/command.h"
 #include "player.h"
+#include <stdio.h>
+#include <string.h>
 
 class Zuul {
 private:
 	void print_welcome_msg(void) const;
 	void print_input_error_msg(void) const;
-	void print_help_msg(std::vector<std::string> commands);
+	void print_help_msg(std::vector<std::string>& commands);
 	void read_command(void);
 	void init(void);
 	void init_program_commands(void);
-	void quit(std::vector<std::string> commands);
+	void print_map(std::vector<std::string>& commands);
+	void quit(std::vector<std::string>& commands);
+	void go(std::vector<std::string>& commands);
 	void print_valid_commands(void) const;
 	void exec_command(void);
 	void init_map(void);

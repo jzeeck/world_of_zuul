@@ -8,6 +8,7 @@ private:
 
 public:
 	Swamp();
+	Swamp(int);
 	~Swamp();
 };
 
