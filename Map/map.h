@@ -6,18 +6,28 @@
 #include "Tiles/graveyard.h"
 #include "Tiles/dungeon.h"
 #include "Tiles/swamp.h"
+#include <iostream>
+
+
+#define MAP_DIMENSION 6
+#define CATHEDRAL_SQUARES 4
+#define DUNGEON_SQUARES 7
 
 class Map {
 private:
-	Dungeon* dungeon;
-	Cathedral* cathedral;
-	Tile* field;
+	Dungeon* dungeon;//[DUNGEON_SQUARES];
+	Cathedral* cathedral;//[CATHEDRAL_SQUARES];
+	Tile* field;//[MAP_DIMENSION*MAP_DIMENSION];
+
 	void init_field(void);
 	void init_dungeon(void);
 	void init_cathedral(void);
+	void link_map_together(void);
 public:
 	Map();
 	~Map();
+
+	void print(void);
 };
 
 

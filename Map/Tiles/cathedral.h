@@ -3,10 +3,12 @@
 
 #include "tile.h"
 
-class Cathedral : Tile{
+class Cathedral : public Tile{
 private:
 
 public:
+	Cathedral();
+	~Cathedral();
 	
 };
 

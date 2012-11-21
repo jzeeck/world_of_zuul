@@ -31,6 +31,8 @@ int Zuul::run(int argc, char** argv) {
 	get_adventurer_name();
 	print_help_msg(g_commands);
 
+	map->print();
+
 	while(!g_quit) {
 
 		read_command();
@@ -77,7 +79,11 @@ void Zuul::read_command(void) {
 }
 
 void Zuul::init(void) {
+	init_map();
 	init_program_commands();
+}
+void Zuul::init_map(void) {
+	map = new Map();
 }
 void Zuul::init_program_commands(void) {
 	std::string s = "quit";

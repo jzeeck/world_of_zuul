@@ -19,6 +19,7 @@ private:
 	void quit(std::vector<std::string> commands);
 	void print_valid_commands(void) const;
 	void exec_command(void);
+	void init_map(void);
 	void print_end_msg(void) const;
 	void get_adventurer_name(void);
 	std::vector<std::string> split(const std::string& strValue, char separator);

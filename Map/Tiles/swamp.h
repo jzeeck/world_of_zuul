@@ -3,11 +3,12 @@
 
 #include "tile.h"
 
-class Swamp : Tile{
+class Swamp : public Tile{
 private:
 
 public:
-	
+	Swamp();
+	~Swamp();
 };
 
 #endif /* SWAMP_H_ */
