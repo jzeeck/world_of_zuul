@@ -8,6 +8,16 @@ Tile::Tile() {
 
 	l_isExplored = false;
 }
+Tile::Tile(int index) {
+	north = NULL;
+	south = NULL;
+	west = NULL;
+	east = NULL;
+
+	l_isExplored = false;
+
+	number = index;
+}
 //setters
 void Tile::set_north(Tile& t) {
 	north = &t;

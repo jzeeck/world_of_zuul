@@ -7,6 +7,7 @@
 
 class Tile {
 private:
+	int number;
 	Tile* north;
 	Tile* south;
 	Tile* west;
@@ -17,6 +18,7 @@ private:
 	std::vector<NPC> v;
 public:
 	Tile();
+	Tile(int);
 	//setters
 	void set_north(Tile& t);
 	void set_south(Tile& t);

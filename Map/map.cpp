@@ -10,6 +10,7 @@ Map::Map() {
 	field = new Tile[MAP_DIMENSION*MAP_DIMENSION];
 
 	init_field();	
+	link_field();
 	init_dungeon();
 	init_cathedral();
 	link_map_together();
@@ -38,7 +39,7 @@ void Map::init_field(void) {
 				std::cout<<"Init a Tile at index "<<index<<std::endl;
 			#endif
 
-			*(field_ptr+index) = Tile();
+			*(field_ptr+index) = Tile(index);
 		}
 	}
 
@@ -96,6 +97,64 @@ void Map::init_field(void) {
 		std::cout<<"Entire field inited!"<<std::endl;
 	#endif
 }
+
+void Map::link_field(void) {
+	Tile* tile_ptr = field;
+
+	//link the middle field!
+	for (int i = 0; i < MAP_DIMENSION-2; ++i)
+	{
+		for (int j = 0; j < MAP_DIMENSION-2; ++j)
+		{
+			(*(tile_ptr+j+7+(i*MAP_DIMENSION))).set_east((*(tile_ptr+j+8+(i*MAP_DIMENSION))));
+			(*(tile_ptr+j+7+(i*MAP_DIMENSION))).set_west((*(tile_ptr+j+6+(i*MAP_DIMENSION))));
+			(*(tile_ptr+j+7+(i*MAP_DIMENSION))).set_south((*(tile_ptr+j+7+(i*MAP_DIMENSION)+MAP_DIMENSION)));
+			(*(tile_ptr+j+7+(i*MAP_DIMENSION))).set_north((*(tile_ptr+j+7+(i*MAP_DIMENSION)-MAP_DIMENSION)));
+		}
+	}
+	for (int i = 1; i < MAP_DIMENSION-1; ++i)
+	{
+		//top
+		(tile_ptr+i)->set_west(*(tile_ptr+i-1));
+		(tile_ptr+i)->set_east(*(tile_ptr+i+1));
+		(tile_ptr+i)->set_south(*(tile_ptr+i+MAP_DIMENSION));
+		//bottom
+		(tile_ptr+31+i)->set_west(*(tile_ptr+i+31-1));
+		(tile_ptr+31+i)->set_east(*(tile_ptr+i+31+1));
+		(tile_ptr+31+i)->set_north(*(tile_ptr+i-MAP_DIMENSION+31));
+	}
+	for (int i = 1; i < MAP_DIMENSION-1; ++i)
+	{
+		//left side
+		(tile_ptr+(i*MAP_DIMENSION))->set_east(*(tile_ptr+(i*MAP_DIMENSION)+1));
+		(tile_ptr+(i*MAP_DIMENSION))->set_north(*(tile_ptr+(i*MAP_DIMENSION)-MAP_DIMENSION));
+		(tile_ptr+(i*MAP_DIMENSION))->set_south(*(tile_ptr+(i*MAP_DIMENSION)+MAP_DIMENSION));
+		//right side
+
+		(tile_ptr+5+(i*MAP_DIMENSION))->set_west(*(tile_ptr+5+(i*MAP_DIMENSION)-1));
+		(tile_ptr+5+(i*MAP_DIMENSION))->set_north(*(tile_ptr+5+(i*MAP_DIMENSION)-MAP_DIMENSION));
+		(tile_ptr+5+(i*MAP_DIMENSION))->set_south(*(tile_ptr+5+(i*MAP_DIMENSION)+MAP_DIMENSION));
+	}
+	//fix corners
+	tile_ptr->set_east(*(tile_ptr+1));
+	tile_ptr->set_south(*(tile_ptr+MAP_DIMENSION));
+
+	tile_ptr = tile_ptr+MAP_DIMENSION-1;
+	(tile_ptr)->set_west(*(tile_ptr-1));
+	(tile_ptr)->set_south(*(tile_ptr+(MAP_DIMENSION)));
+
+	tile_ptr = field;
+	tile_ptr = tile_ptr+(MAP_DIMENSION*MAP_DIMENSION)-1;
+	(tile_ptr)->set_west(*(tile_ptr-1));
+	(tile_ptr)->set_north(*(tile_ptr-(MAP_DIMENSION)));
+
+	tile_ptr = tile_ptr-MAP_DIMENSION-1;
+	tile_ptr->set_east(*(tile_ptr+1));
+	(tile_ptr)->set_north(*(tile_ptr-(MAP_DIMENSION)));
+
+
+}
+
 void Map::init_dungeon(void) {
 	Dungeon* ptr = dungeon;
 	for(int i = 0;i<DUNGEON_SQUARES;++i){

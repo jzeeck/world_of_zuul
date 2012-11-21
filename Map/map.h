@@ -20,6 +20,7 @@ private:
 	Tile* field;//[MAP_DIMENSION*MAP_DIMENSION];
 
 	void init_field(void);
+	void link_field(void);
 	void init_dungeon(void);
 	void init_cathedral(void);
 	void link_map_together(void);
