@@ -1,10 +1,10 @@
-#include "weapon.h"
+#include "consumable.h"
 
 // Constructors
-Consumable::Consumable(std::string name){
+Consumable::Consumable(const std::string name){
 	set_name(name);
 }
-Consumable::Consumable(std::string name, int weight, std::string consumable_effect, int grade){
+Consumable::Consumable(const std::string name, const int weight, const std::string consumable_effect, const int grade){
 	set_name(name);
 	set_weight(weight);
 	set_consumable_effect(consumable_effect);
@@ -12,15 +12,15 @@ Consumable::Consumable(std::string name, int weight, std::string consumable_effe
 }
 
 // functions
-std::string Consumable::get_consumable_effect(void){
+std::string Consumable::get_consumable_effect(void) const{
 	return consumable_effect;
 }
-void Consumable::set_consumable_effect(std::string effect){
+void Consumable::set_consumable_effect(const std::string effect){
 	consumable_effect = effect;
 }
-int Consumable::get_consumable_grade(void){
+int Consumable::get_consumable_grade(void) const{
 	return consumable_grade;
 }
-void Consumable::set_consumable_grade(int grade){
+void Consumable::set_consumable_grade(const int grade){
 	consumable_grade = grade;
 }

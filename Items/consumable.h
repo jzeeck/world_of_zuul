@@ -10,14 +10,14 @@ private:
 	int consumable_grade;
 public:
 	// Constructors
-	Consumable(std::string name);
-	Consumable(std::string name, int weight, std::string consumable_effect, int grade);
+	Consumable(const std::string name);
+	Consumable(const std::string name, const int weight, const std::string consumable_effect, const int grade);
 
 	// functions
-	std::string get_consumable_effect(void);
-	void set_consumable_effect(std::string);
-	int get_consumable_grade(void);
-	void set_consumable_grade(int);
+	std::string get_consumable_effect(void) const;
+	void set_consumable_effect(const std::string);
+	int get_consumable_grade(void) const;
+	void set_consumable_grade(const int);
 
 };
 
