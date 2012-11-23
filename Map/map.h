@@ -22,7 +22,9 @@ private:
 	void init_field(void);
 	void link_field(void);
 	void init_dungeon(void);
+	void link_dungeon(void);
 	void init_cathedral(void);
+	void link_cathedral(void);
 	void link_map_together(void);
 
 public:

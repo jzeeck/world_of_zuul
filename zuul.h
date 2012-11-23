@@ -22,6 +22,7 @@ private:
 	void quit(std::vector<std::string>& commands);
 	void go(std::vector<std::string>& commands);
 	void print_valid_commands(void) const;
+	void print_valid_directions(void) const;
 	void exec_command(void);
 	void init_map(void);
 	void print_end_msg(void) const;

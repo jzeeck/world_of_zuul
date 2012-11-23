@@ -1,5 +1,7 @@
 #include "dungeon.h"
 
-Dungeon::Dungeon(){}
+Dungeon::Dungeon(){
+	tile_type = DUNGEON;
+}
 
 Dungeon::~Dungeon(){}

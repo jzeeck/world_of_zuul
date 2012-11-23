@@ -8,7 +8,9 @@ Map::Map() : dungeon(new Dungeon[DUNGEON_SQUARES]), cathedral(new Cathedral[CATH
 	init_field();	
 	link_field();
 	init_dungeon();
+	link_dungeon();
 	init_cathedral();
+	link_cathedral();
 	link_map_together();
 }
 Map::~Map() {
@@ -118,9 +120,9 @@ void Map::link_field(void) {
 		(tile_ptr+i)->set_east(*(tile_ptr+i+1));
 		(tile_ptr+i)->set_south(*(tile_ptr+i+MAP_DIMENSION));
 		//bottom
-		(tile_ptr+31+i)->set_west(*(tile_ptr+i+31-1));
-		(tile_ptr+31+i)->set_east(*(tile_ptr+i+31+1));
-		(tile_ptr+31+i)->set_north(*(tile_ptr+i-MAP_DIMENSION+31));
+		(tile_ptr+30+i)->set_west(*(tile_ptr+i+30-1));
+		(tile_ptr+30+i)->set_east(*(tile_ptr+i+30+1));
+		(tile_ptr+30+i)->set_north(*(tile_ptr+i-MAP_DIMENSION+30));
 	}
 	for (int i = 1; i < MAP_DIMENSION-1; ++i)
 	{
@@ -135,19 +137,23 @@ void Map::link_field(void) {
 		(tile_ptr+5+(i*MAP_DIMENSION))->set_south(*(tile_ptr+5+(i*MAP_DIMENSION)+MAP_DIMENSION));
 	}
 	//fix corners
+	//top left
 	tile_ptr->set_east(*(tile_ptr+1));
 	tile_ptr->set_south(*(tile_ptr+MAP_DIMENSION));
 
+	//top rigth
 	tile_ptr = tile_ptr+MAP_DIMENSION-1;
 	(tile_ptr)->set_west(*(tile_ptr-1));
 	(tile_ptr)->set_south(*(tile_ptr+(MAP_DIMENSION)));
 
+	//bottom right
 	tile_ptr = field;
 	tile_ptr = tile_ptr+(MAP_DIMENSION*MAP_DIMENSION)-1;
 	(tile_ptr)->set_west(*(tile_ptr-1));
 	(tile_ptr)->set_north(*(tile_ptr-(MAP_DIMENSION)));
 
-	tile_ptr = tile_ptr-MAP_DIMENSION-1;
+	//bottom left
+	tile_ptr = tile_ptr-MAP_DIMENSION+1;	
 	tile_ptr->set_east(*(tile_ptr+1));
 	(tile_ptr)->set_north(*(tile_ptr-(MAP_DIMENSION)));
 
@@ -161,14 +167,55 @@ void Map::init_dungeon(void) {
 	}
 
 }
+
+void Map::link_dungeon(void) {
+	Dungeon* ptr = dungeon;
+	ptr->set_east(*(ptr+1));
+	(ptr+1)->set_east(*(ptr+2));
+	(ptr+2)->set_east(*(ptr+4));
+	(ptr+4)->set_east(*(ptr+6));
+
+
+	(ptr+2)->set_north(*(ptr+3));
+	(ptr+5)->set_north(*(ptr+4));
+
+	(ptr+3)->set_south(*(ptr+2));
+	(ptr+4)->set_south(*(ptr+5));
+
+	(ptr+5)->set_west(*(ptr+4));
+	(ptr+4)->set_west(*(ptr+2));
+	(ptr+2)->set_west(*(ptr+1));
+	(ptr+1)->set_west(*(ptr+0));
+}
+
 void Map::init_cathedral(void) {
 	Cathedral* ptr = cathedral;
 	for(int i = 0;i<CATHEDRAL_SQUARES;++i){
 		(*(ptr+i)) = Cathedral();
 	}
 }
-void Map::link_map_together() {
 
+void Map::link_cathedral(void) {
+	Cathedral* ptr = cathedral;
+
+	ptr->set_east(*(ptr+2));
+	(ptr+2)->set_west(*(ptr));
+
+	(ptr+1)->set_south(*(ptr+2));
+	(ptr+2)->set_south(*(ptr+3));
+
+	(ptr+3)->set_north(*(ptr+2));
+	(ptr+2)->set_north(*(ptr+1));
+}
+
+
+void Map::link_map_together() {
+	dungeon->set_south(*field);
+	field->set_north(*dungeon);
+
+
+	cathedral->set_west(*(field+17));
+	(field+17)->set_east(*cathedral);
 }
 Dungeon* Map::get_dungeon() const{
 	return dungeon;

@@ -2,6 +2,9 @@
 
 std::map<std::string, Tile* (Tile::*)() const> Tile::directions;
 
+static const std::vector<std::string> string_direction = {"west","east","south","north"};
+const std::vector<std::string> Tile::string_type = {};
+
 Tile::Tile() {
 	north = NULL;
 	south = NULL;
@@ -9,11 +12,14 @@ Tile::Tile() {
 	east = NULL;
 
 	l_isExplored = false;
+	tile_type = FIELD;
 
 	init_directions();
 }
 Tile::Tile(int index) :north(NULL),south(NULL),west(NULL),east(NULL),l_isExplored(false){
 
+
+	tile_type = FIELD;
 	number = index;
 
 	init_directions();
@@ -24,11 +30,29 @@ void Tile::init_directions() {
 	directions.insert(std::pair<std::string, Tile* (Tile::*)() const>("south", &Tile::get_south));
 	directions.insert(std::pair<std::string, Tile* (Tile::*)() const>("north", &Tile::get_north));
 }
+
+std::string Tile::get_valid_directions(void) const{
+	std::string return_string = "";
+	auto it = string_direction.begin();
+	while(it != string_direction.end()) {
+		auto it2 = directions.find(*it);
+		if(it2 != directions.end()) {
+			Tile * tile_ptr = (this->*((*it2).second))();
+			if(NULL != tile_ptr){
+				return_string.append(*it).append(" ");
+			}
+		}
+		++it;
+	}
+	return return_string;
+}
+
 //setters
 void Tile::explore() {
 	#ifdef DEBUGG
 	if(!l_isExplored)
-		std::cout<<"Explored a new tile"<<std::endl;
+		std::cout<<"Explored a new tile"<<std::endl;	
+	std::cout<<"Tile had index "<<number<<std::endl;
 	#endif
 
 	l_isExplored = true;

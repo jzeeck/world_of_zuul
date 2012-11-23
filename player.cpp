@@ -31,4 +31,9 @@ bool Player::move(std::string dir) {
 		return false;
 	current_tile = next_tile;
 	current_tile->explore();
+	return true;
+}
+
+Tile * Player::get_current_tile() const{
+	return current_tile;
 }

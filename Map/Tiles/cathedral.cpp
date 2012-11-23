@@ -1,3 +1,5 @@
 #include "cathedral.h"
-Cathedral::Cathedral() {}
+Cathedral::Cathedral() {
+	tile_type = CATHEDRAL;
+}
 Cathedral::~Cathedral() {}
