@@ -8,6 +8,7 @@ private:
 	
 public:
 	Dungeon();
+	Dungeon(int);
 	~Dungeon();
 
 };

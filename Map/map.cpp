@@ -5,6 +5,7 @@
 #define DUNGEON_SQUARES 7
 
 Map::Map() : dungeon(new Dungeon[DUNGEON_SQUARES]), cathedral(new Cathedral[CATHEDRAL_SQUARES]), field(new Tile[MAP_DIMENSION*MAP_DIMENSION]){
+	dungeon_is_unlocked = false;
 	init_field();	
 	link_field();
 	init_dungeon();
@@ -163,7 +164,7 @@ void Map::link_field(void) {
 void Map::init_dungeon(void) {
 	Dungeon* ptr = dungeon;
 	for(int i = 0;i<DUNGEON_SQUARES;++i){
-		(*(ptr+i)) = Dungeon();
+		(*(ptr+i)) = Dungeon(i);
 	}
 
 }
@@ -191,7 +192,7 @@ void Map::link_dungeon(void) {
 void Map::init_cathedral(void) {
 	Cathedral* ptr = cathedral;
 	for(int i = 0;i<CATHEDRAL_SQUARES;++i){
-		(*(ptr+i)) = Cathedral();
+		(*(ptr+i)) = Cathedral(i);
 	}
 }
 
@@ -217,6 +218,7 @@ void Map::link_map_together() {
 	cathedral->set_west(*(field+17));
 	(field+17)->set_east(*cathedral);
 }
+
 Dungeon* Map::get_dungeon() const{
 	return dungeon;
 }
@@ -227,6 +229,13 @@ Cathedral* Map::get_cathedral() const{
 
 Tile* Map::get_field() const {
 	return field;
+}
+bool Map::is_dungeon_unlocked(void) {
+	return dungeon_is_unlocked;
+}
+
+void Map::unlock_dungeon(void) {
+	dungeon_is_unlocked = true;
 }
 
 std::ostream& operator<<(std::ostream& stream, const Map& map) {

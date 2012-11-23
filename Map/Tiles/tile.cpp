@@ -3,7 +3,7 @@
 std::map<std::string, Tile* (Tile::*)() const> Tile::directions;
 
 static const std::vector<std::string> string_direction = {"west","east","south","north"};
-const std::vector<std::string> Tile::string_type = {};
+const std::vector<std::string> Tile::string_type = {"field", "swamp", "graveyard", "cathedral", "dungeon"};
 
 Tile::Tile() {
 	north = NULL;

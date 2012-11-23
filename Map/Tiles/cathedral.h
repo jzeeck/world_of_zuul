@@ -8,6 +8,7 @@ private:
 
 public:
 	Cathedral();
+	Cathedral(int);
 	~Cathedral();
 	
 };
