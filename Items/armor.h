@@ -16,8 +16,8 @@ public:
 	// functions
 	int get_protection(void) const;
 	void set_protection(int);
-	std::string get_armor_type(void) const;
-	void set_armor_type(const std::string);
+	// std::string get_armor_type(void) const;
+	// void set_armor_type(const std::string);
 
 
 };
