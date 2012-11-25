@@ -18,11 +18,14 @@ private:
 	Dungeon* const dungeon;//;//[DUNGEON_SQUARES];
 	Cathedral* const cathedral;//[CATHEDRAL_SQUARES];
 	Tile* const field;//[MAP_DIMENSION*MAP_DIMENSION];
+	bool dungeon_is_unlocked;
 
 	void init_field(void);
 	void link_field(void);
 	void init_dungeon(void);
+	void link_dungeon(void);
 	void init_cathedral(void);
+	void link_cathedral(void);
 	void link_map_together(void);
 
 public:
@@ -35,6 +38,9 @@ public:
 	Tile* get_field(void) const;
 
 	Tile* get_starting_position(void) const;
+
+	bool is_dungeon_unlocked(void);
+	void unlock_dungeon(void);
 
 	friend std::ostream& operator<<(std::ostream& stream, const Map& map);
 };

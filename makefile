@@ -6,7 +6,7 @@ all: compile
 
 
 compile: commands player map
-	$(CC) $(CFLAGS) map.o npc.o commands.o graveyard.o dungeon.o swamp.o cathedral.o Commands/game_command.h item.o player.o tiles.o zuul.cpp main.cpp -o zuul
+	$(CC) $(CFLAGS) *.o  Commands/game_command.h zuul.cpp main.cpp -o zuul
 
 run:
 	./zuul

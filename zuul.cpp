@@ -30,7 +30,8 @@ int Zuul::run(int argc, char** argv) {
 	print_welcome_msg();
 	get_adventurer_name();
 	print_help_msg(g_commands);
-
+	print_valid_directions();
+	
 	while(!g_quit) {
 
 		read_command();
@@ -102,13 +103,21 @@ void Zuul::init_program_commands(void) {
 		void (Zuul::*)(std::vector<std::string> commands)>("help", &Zuul::print_help_msg));*/
 	
 }
+
+void Zuul::print_valid_directions(void) const {
+	std::cout<<"Valid directions: "<<g_player->get_current_tile()->get_valid_directions()<<std::endl<<std::endl;
+}
+
 void Zuul::go(std::vector<std::string>& commands) {
 	if(commands.size() != 2){
 		print_input_error_msg();
 	}
-	if!(g_player->move(commands[1]))
-		//print error
-		;
+	if(!g_player->move(commands[1])) {
+		std::cout<<'"'<<commands[1]<<'"'<<" is not a valid direction."<<std::endl;
+	}
+	else {
+		print_valid_directions();
+	}
 }
 void Zuul::quit(std::vector<std::string>& commands) {
 	g_quit = true;
