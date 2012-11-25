@@ -11,7 +11,7 @@ private:
 public:
 	// Constructors
 	Consumable(const std::string name);
-	Consumable(const std::string name, const int weight, const std::string consumable_effect, const int grade);
+	Consumable(const std::string name, const std::string consumable_effect, const int grade);
 
 	// functions
 	std::string get_consumable_effect(void) const;

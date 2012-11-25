@@ -3,12 +3,14 @@
 // Constructors
 Consumable::Consumable(const std::string name){
 	set_name(name);
+	set_type("CONSUMABLE");
 }
-Consumable::Consumable(const std::string name, const int weight, const std::string consumable_effect, const int grade){
+
+Consumable::Consumable(const std::string name, const std::string consumable_effect, const int grade){
 	set_name(name);
-	set_weight(weight);
 	set_consumable_effect(consumable_effect);
 	set_consumable_grade(grade);
+	set_type("CONSUMABLE");
 }
 
 // functions

@@ -3,12 +3,14 @@
 
 Weapon::Weapon(const std::string name){
 	set_name(name);
+	set_type("WEAPON");
 }
-Weapon::Weapon(const std::string name, const int weight, const int damage, const bool two_handed){
+
+Weapon::Weapon(const std::string name, const int damage, const bool two_handed){
 	set_name(name);
-	set_weight(weight);
 	set_damage(damage);
 	set_two_handed(two_handed);
+	set_type("WEAPON");
 }
 
 // functions

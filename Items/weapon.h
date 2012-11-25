@@ -8,10 +8,11 @@ class Weapon : public Item {
 private:
 	int weapon_damage;
 	bool two_handed_weapon;
+	
 public:
 	// Constructors
 	Weapon(const std::string name);
-	Weapon(const std::string name, const int weight, const int damage, const bool two_handed);
+	Weapon(const std::string name, const int damage, const bool two_handed);
 
 	// functions
 	int get_damage(void) const;

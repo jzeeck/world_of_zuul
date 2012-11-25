@@ -16,8 +16,9 @@ commands:
 
 
 
-testitems: item Items/testitems.cpp Items/testitems.h
-	$(CC) $(CFLAGS) -c Items/testitems.cpp -o testitems
+
+testitems: tiles player Items/testitems.cpp Items/testitems.h
+	$(CC) $(CFLAGS) tiles.o consumable.o weapon.o armor.o item.o player.o Items/testitems.cpp -o testitems
 
 
 player: item
