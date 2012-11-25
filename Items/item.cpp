@@ -2,8 +2,11 @@
 
 
 Item::Item(){
-	item_name = "UNINITIALIZED ITEM";
+	item_name = "UNINITIALIZED_ITEM";
+	item_type = "UNINITIALIZED_ITEM";
+	item_description = "UNINITIALIZED_ITEM";
 }
+
 std::string Item::get_name() const{
 	return item_name;
 }

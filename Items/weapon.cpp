@@ -1,10 +1,10 @@
 #include "weapon.h"
 
 
-Weapon::Weapon(const std::string name){
-	set_name(name);
-	set_type("WEAPON");
-}
+// Weapon::Weapon(const std::string name){
+// 	set_name(name);
+// 	set_type("WEAPON");
+// }
 
 Weapon::Weapon(const std::string name, const int damage, const bool two_handed){
 	set_name(name);

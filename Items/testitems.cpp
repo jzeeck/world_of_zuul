@@ -5,12 +5,18 @@ int main(int argc, char** argv) {
 	Player fool;
 	// Player * player_pointer = player;
 
-	cout << fool.get_hp() << endl;
-	cout << fool.get_exp() << endl;
-	fool.level_up();
-	cout << fool.get_hp() << endl;
-	cout << fool.get_exp() << endl;
-	fool.delete_inventory_at(0);
+	// cout << fool.get_hp() << endl;
+	// cout << fool.get_exp() << endl;
+	// fool.level_up();
+	// cout << fool.get_hp() << endl;
+	// cout << fool.get_exp() << endl;
+	Weapon * sword = new Weapon("Fools sword",2000,false);
+	// fool.equip_weapon(sword);
+	// cout << fool.get_damage() << endl;
+	// fool.unequip_item("WEAPON");
+	cout << fool.get_damage() << endl;
+	// fool.equip_weapon(sword);
+	// fool.delete_inventory_at(0);
 	// Weapon * sword = new Weapon("Sword",100,false);
 	// Weapon * pointer;
 	// *pointer = sword;
@@ -24,7 +30,7 @@ int main(int argc, char** argv) {
 	// cout <<"strenght - 100: " << fool.get_strength() << endl;
 
 	//fool.unequip_item("WEAPON");
-	// delete sword;
+	delete sword;
 	std::cout << "testitems finished" << std::endl;
 	// return 1;
 }

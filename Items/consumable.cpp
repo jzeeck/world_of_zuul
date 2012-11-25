@@ -1,10 +1,10 @@
 #include "consumable.h"
 
 // Constructors
-Consumable::Consumable(const std::string name){
-	set_name(name);
-	set_type("CONSUMABLE");
-}
+// Consumable::Consumable(const std::string name){
+// 	set_name(name);
+// 	set_type("CONSUMABLE");
+// }
 
 Consumable::Consumable(const std::string name, const std::string consumable_effect, const int grade){
 	set_name(name);

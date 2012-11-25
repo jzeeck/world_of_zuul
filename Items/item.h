@@ -10,9 +10,9 @@ private:
 	std::string item_type;
 public:
 	Item();
-	std::string get_name() const;
-	std::string get_type() const;
-	std::string get_description() const;	
+	std::string get_name(void) const;
+	std::string get_type(void) const;
+	std::string get_description(void) const;	
 
 	// operators
 	bool operator==(const Item other_item) const;

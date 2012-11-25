@@ -10,7 +10,7 @@ private:
 	int consumable_grade;
 public:
 	// Constructors
-	Consumable(const std::string name);
+	// Consumable(const std::string name);
 	Consumable(const std::string name, const std::string consumable_effect, const int grade);
 
 	// functions

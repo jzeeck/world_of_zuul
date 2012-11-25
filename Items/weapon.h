@@ -11,7 +11,7 @@ private:
 	
 public:
 	// Constructors
-	Weapon(const std::string name);
+	// Weapon(const std::string name);
 	Weapon(const std::string name, const int damage, const bool two_handed);
 
 	// functions
