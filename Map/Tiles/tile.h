@@ -2,7 +2,6 @@
 #define TILE_H_
 #include <cstddef>
 #include <vector>
-#include "../../NPC/npc.h"
 #include <iostream>
 #include <map>
 #include <utility>
@@ -22,7 +21,6 @@ private:
 
 	bool l_isExplored;
 
-	std::vector<NPC> npc;
 	static std::map<std::string, Tile* (Tile::*)() const> directions;
 	static const std::vector<std::string> string_type;
 	void init_directions(void);

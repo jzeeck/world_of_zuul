@@ -5,7 +5,7 @@ CFLAGS = -std=c++0x -Wall -DDEBUGG
 all: compile
 
 
-compile: commands player map
+compile: commands player map npc
 	$(CC) $(CFLAGS) *.o  Commands/game_command.h zuul.cpp main.cpp -o zuul
 
 run:
@@ -30,7 +30,7 @@ item: Items/item.cpp Items/item.h
 map: tiles Map/map.cpp Map/map.h
 	$(CC) $(CFLAGS) -c Map/map.cpp -o map.o
 
-tiles: cathedral graveyard dungeon swamp npc Map/Tiles/tile.cpp Map/Tiles/tile.h
+tiles: cathedral graveyard dungeon swamp Map/Tiles/tile.cpp Map/Tiles/tile.h
 	$(CC) Map/Tiles/tile.cpp $(CFLAGS) -o tiles.o -c
 
 cathedral: cathedral Map/Tiles/cathedral.cpp Map/Tiles/cathedral.h
@@ -47,5 +47,9 @@ swamp: swamp
 
 
 
-npc:
+npc: NPC/npc.cpp NPC/npc.h paladin
 	$(CC) NPC/npc.cpp $(CFLAGS) -o npc.o -c
+
+paladin: NPC/paladin.cpp NPC/paladin.h
+	$(CC) NPC/paladin.cpp $(CFLAGS) -o paladin.o -c
+
