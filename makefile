@@ -2,20 +2,18 @@ CC = g++
 CFLAGS = -std=c++0x -Wall -DDEBUGG
 
 
+
 all: compile
 
 
 compile: commands player map npc
 	$(CC) $(CFLAGS) *.o  Commands/game_command.h zuul.cpp main.cpp -o zuul
 
-run:
+run: compile
 	./zuul
 
 commands:
 	$(CC) $(CFLAGS) -c Commands/command.cpp -o commands.o
-
-
-
 
 player: item
 	$(CC) $(CFLAGS) -c player.cpp -o player.o

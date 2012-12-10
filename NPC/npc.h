@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "../Items/item.h"
+#include "../player.h"
 #include "../Map/Tiles/tile.h"
 
 #define PALADIN_FACTION 0
@@ -21,6 +22,7 @@ public:
 	~NPC();
 	bool is_dead(void);
 	virtual void walk(void);
+	virtual void action(const Player& player);
 	virtual unsigned int do_attack(void) const;
 	virtual void get_damage(int);
 	Tile& get_current_tile(void) const;

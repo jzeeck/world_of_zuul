@@ -18,6 +18,9 @@ bool NPC::is_dead(void) {
 void NPC::walk(void) {
 
 }
+void NPC::action(const Player& player) {
+	
+}
 
 unsigned int NPC::do_attack(void) const{
 	return 1;

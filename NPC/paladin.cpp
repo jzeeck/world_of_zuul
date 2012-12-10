@@ -32,10 +32,15 @@ void Paladin::walk(void) {
 	direction = dir_vector[index];
 	Tile * next_tile  = current_tile->get_direction(direction);
 	#ifdef DEBUGG
-		std::cout << "Paladin moved!" << std::endl;	
-		std::cout << "Next paladin tile index was " <<next_tile->get_number()<< std::endl;	
+		std::cout << "New paladin tile index was " <<next_tile->get_number()<< std::endl;	
 	#endif
 	current_tile = next_tile;
+}
+
+void Paladin::action(const Player& player) {
+	if(!(player.get_current_tile()==(*current_tile))) {
+		walk();
+	}
 }
 
 unsigned int Paladin::do_attack(void) const{

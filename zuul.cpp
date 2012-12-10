@@ -43,6 +43,7 @@ int Zuul::run(int argc, char** argv) {
 
 			next_turn = false;
 			npc_action();
+			look(g_commands);
 		}
 	}
 	print_end_msg();
@@ -99,6 +100,8 @@ void Zuul::init_map(void) {
 void Zuul::init_program_commands(void) {
 	std::string s = "go";
 	g_command_vector.push_back(new GameCommand<void (Zuul::*)(std::vector<std::string>& commands), Zuul*>(s, &Zuul::go, this));
+	s = "look";
+	g_command_vector.push_back(new GameCommand<void (Zuul::*)(std::vector<std::string>& commands), Zuul*>(s, &Zuul::look, this));
 	s = "quit";
 	//new GameCommand<void (Zuul::*)(std::vector<std::string> commands), Zuul*> command(s, &Zuul::quit, this);
 	//g_command_vector.push_back(new (Zuul::*)(std::vector<std::string> commands), Zuul*> (s, &Zuul::quit, this));
@@ -139,6 +142,7 @@ void Zuul::look(std::vector<std::string>& commands) {
 		if(temp_tile == g_player->get_current_tile()){
 			std::cout<<"There is a "<<(*it)->get_name()<<" close to you."<<std::endl;
 		}
+		++it;
 	}
 }
 
@@ -222,7 +226,7 @@ void Zuul::print_input_error_msg(void) const {
 void Zuul::npc_action(void) {
 	auto it = g_npc_vector.begin();
 	while(it != g_npc_vector.end()) {
-		(*it)->walk();//TODO
+		(*it)->action(*g_player);
 		it++;
 	}
 }

@@ -15,6 +15,7 @@ public:
 	~Paladin();
 	virtual void walk(void);
 	virtual unsigned int do_attack(void) const;
+	virtual void action(const Player& player);
 	virtual void get_damage(int);
 };
 
