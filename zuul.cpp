@@ -11,8 +11,12 @@
 char g_input[MAX_BYTES];
 
 bool Zuul::g_quit = false;
+bool next_turn = false;
+
 std::vector<std::string> Zuul::g_commands;
 std::vector<Command*> Zuul::g_command_vector;
+std::vector<NPC*> Zuul::g_npc_vector;
+
 Player* Zuul::g_player;
 Map * map;
 
@@ -33,9 +37,13 @@ int Zuul::run(int argc, char** argv) {
 	print_valid_directions();
 	
 	while(!g_quit) {
-
 		read_command();
 		exec_command();
+		if(next_turn){
+
+			next_turn = false;
+			npc_action();
+		}
 	}
 	print_end_msg();
 	return 1;
@@ -80,7 +88,9 @@ void Zuul::read_command(void) {
 }
 
 void Zuul::init(void) {
+	srand ( time(NULL) );
 	init_map();
+	init_npc();
 	init_program_commands();
 }
 void Zuul::init_map(void) {
@@ -105,7 +115,7 @@ void Zuul::init_program_commands(void) {
 }
 
 void Zuul::print_valid_directions(void) const {
-	std::cout<<"Valid directions: "<<g_player->get_current_tile()->get_valid_directions()<<std::endl<<std::endl;
+	std::cout<<"Valid directions: "<<g_player->get_current_tile().get_valid_directions()<<std::endl<<std::endl;
 }
 
 void Zuul::go(std::vector<std::string>& commands) {
@@ -114,11 +124,24 @@ void Zuul::go(std::vector<std::string>& commands) {
 	}
 	if(!g_player->move(commands[1])) {
 		std::cout<<'"'<<commands[1]<<'"'<<" is not a valid direction."<<std::endl;
+		
 	}
 	else {
+		next_turn = true;
 		print_valid_directions();
 	}
 }
+
+void Zuul::look(std::vector<std::string>& commands) {
+	auto it = g_npc_vector.begin();
+	while(it != g_npc_vector.end()) {
+		Tile temp_tile = (*it)->get_current_tile();
+		if(temp_tile == g_player->get_current_tile()){
+			std::cout<<"There is a "<<(*it)->get_name()<<" close to you."<<std::endl;
+		}
+	}
+}
+
 void Zuul::quit(std::vector<std::string>& commands) {
 	g_quit = true;
 }
@@ -195,4 +218,16 @@ std::vector<std::string> Zuul::split(const std::string& strValue, char separator
 
 void Zuul::print_input_error_msg(void) const {
 	std::cout <<'"'<< g_input <<'"' << ", was not a valid input!"<<std::endl;
+}
+void Zuul::npc_action(void) {
+	auto it = g_npc_vector.begin();
+	while(it != g_npc_vector.end()) {
+		(*it)->walk();//TODO
+		it++;
+	}
+}
+void Zuul::init_npc(void) {
+	//paladin
+	g_npc_vector.push_back(new Paladin("Paladin Dicander", 2900, map->get_cathedral()));
+	//monsters
 }

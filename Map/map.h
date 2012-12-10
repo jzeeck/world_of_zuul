@@ -15,8 +15,8 @@
 
 class Map {
 private:
-	Dungeon* const dungeon;//;//[DUNGEON_SQUARES];
-	Cathedral* const cathedral;//[CATHEDRAL_SQUARES];
+	Tile* const dungeon;//;//[DUNGEON_SQUARES];
+	Tile* const cathedral;//[CATHEDRAL_SQUARES];
 	Tile* const field;//[MAP_DIMENSION*MAP_DIMENSION];
 	bool dungeon_is_unlocked;
 
@@ -33,9 +33,11 @@ public:
 	~Map();
 
 	//getters
-	Dungeon* get_dungeon(void) const;
-	Cathedral* get_cathedral(void) const;
+	Tile* get_dungeon(void) const;
+	Tile* get_cathedral(void) const;
 	Tile* get_field(void) const;
+
+	Tile* find_tile(const Tile& tile) const;
 
 	Tile* get_starting_position(void) const;
 

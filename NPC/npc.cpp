@@ -19,10 +19,16 @@ void NPC::walk(void) {
 
 }
 
-unsigned int NPC::do_attack(void) {
+unsigned int NPC::do_attack(void) const{
 	return 1;
 }
 
 void NPC::get_damage(int dmg) {
 	hp -= dmg;
-} 
+}
+Tile& NPC::get_current_tile(void) const {
+	return *current_tile;
+}
+std::string NPC::get_name(void) const {
+	return name;
+}

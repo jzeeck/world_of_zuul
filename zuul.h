@@ -6,6 +6,8 @@
 #include <map>
 #include <utility>
 #include "Commands/command.h"
+#include "NPC/npc.h"
+#include "NPC/paladin.h"
 #include "player.h"
 #include <stdio.h>
 #include <string.h>
@@ -21,16 +23,21 @@ private:
 	void print_map(std::vector<std::string>& commands);
 	void quit(std::vector<std::string>& commands);
 	void go(std::vector<std::string>& commands);
+	void look(std::vector<std::string>& commands);
 	void print_valid_commands(void) const;
 	void print_valid_directions(void) const;
 	void exec_command(void);
 	void init_map(void);
 	void print_end_msg(void) const;
 	void get_adventurer_name(void);
+	void npc_action(void);
+	void init_npc(void);
+
 	std::vector<std::string> split(const std::string& strValue, char separator);
 	static bool g_quit;
 	static std::vector<std::string> g_commands;
 	static std::vector<Command*> g_command_vector;
+	static std::vector<NPC*> g_npc_vector;
 	//static std::multimap<std::string, void (Zuul::*)(std::vector<std::string>)> g_commad_map;
 	static Player* g_player;
 public:

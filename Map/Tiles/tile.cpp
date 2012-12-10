@@ -52,7 +52,7 @@ void Tile::explore() {
 	#ifdef DEBUGG
 	if(!l_isExplored)
 		std::cout<<"Explored a new tile"<<std::endl;	
-	std::cout<<"Tile had index "<<number<<std::endl;
+		std::cout<<"Tile had index "<<number<<std::endl;
 	#endif
 
 	l_isExplored = true;
@@ -111,4 +111,42 @@ std::ostream& operator<<(std::ostream& stream, const Tile& tile) {
 	}
 
 	return stream;
+}
+bool Tile::is_field(void) const {
+	if (tile_type <= GRAVEYARD)
+		return true;
+	return false;
+}
+
+bool Tile::is_swamp(void) const {
+	if (tile_type == SWAMP)
+		return true;
+	return false;
+}
+
+bool Tile::is_graveyard(void) const {
+	if (tile_type == GRAVEYARD)
+		return true;
+	return false;
+}
+
+bool Tile::is_cathedral(void) const {
+	if (tile_type == CATHEDRAL)
+		return true;
+	return false;
+}
+
+bool Tile::is_dungeon(void) const {
+	if (tile_type == DUNGEON)
+		return true;
+	return false;
+}
+int Tile::get_number(void) const {
+	return number;
+}
+bool Tile::operator==(const Tile& tile) const {
+	if(number == tile.number && tile_type == tile.tile_type) {
+		return true;
+	}
+	return false;
 }

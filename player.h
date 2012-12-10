@@ -34,7 +34,7 @@ public:
 	Player(Tile*);
 	~Player();
 	bool move(std::string);
-	Tile * get_current_tile(void)const;
+	Tile& get_current_tile(void)const;
 };
 
 #endif /* PLAYER_H_ */

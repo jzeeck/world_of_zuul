@@ -46,6 +46,13 @@ public:
 	void explore(void);
 	//print
 	friend std::ostream& operator<<(std::ostream& stream, const Tile& tile);
+	bool operator==(const Tile& tile) const;
+	bool is_field(void) const;
+	bool is_swamp(void) const;
+	bool is_graveyard(void) const;
+	bool is_cathedral(void) const;
+	bool is_dungeon(void) const;
+	int get_number(void) const;
 };
 
 #endif /* TILE_H_ */

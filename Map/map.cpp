@@ -162,7 +162,7 @@ void Map::link_field(void) {
 }
 
 void Map::init_dungeon(void) {
-	Dungeon* ptr = dungeon;
+	Tile* ptr = dungeon;
 	for(int i = 0;i<DUNGEON_SQUARES;++i){
 		(*(ptr+i)) = Dungeon(i);
 	}
@@ -170,7 +170,7 @@ void Map::init_dungeon(void) {
 }
 
 void Map::link_dungeon(void) {
-	Dungeon* ptr = dungeon;
+	Tile* ptr = dungeon;
 	ptr->set_east(*(ptr+1));
 	(ptr+1)->set_east(*(ptr+2));
 	(ptr+2)->set_east(*(ptr+4));
@@ -190,14 +190,14 @@ void Map::link_dungeon(void) {
 }
 
 void Map::init_cathedral(void) {
-	Cathedral* ptr = cathedral;
+	Tile* ptr = cathedral;
 	for(int i = 0;i<CATHEDRAL_SQUARES;++i){
 		(*(ptr+i)) = Cathedral(i);
 	}
 }
 
 void Map::link_cathedral(void) {
-	Cathedral* ptr = cathedral;
+	Tile* ptr = cathedral;
 
 	ptr->set_east(*(ptr+2));
 	(ptr+2)->set_west(*(ptr));
@@ -219,11 +219,11 @@ void Map::link_map_together() {
 	(field+17)->set_east(*cathedral);
 }
 
-Dungeon* Map::get_dungeon() const{
+Tile* Map::get_dungeon() const{
 	return dungeon;
 }
 
-Cathedral* Map::get_cathedral() const{
+Tile* Map::get_cathedral() const{
 	return cathedral;
 }
 
@@ -250,14 +250,14 @@ std::ostream& operator<<(std::ostream& stream, const Map& map) {
 		std::cout<<std::endl;
 	}
 	
-	Cathedral* cathedral_ptr = map.get_cathedral();
+	Tile* cathedral_ptr = map.get_cathedral();
 
 	std::cout<<"Cathedral:"<<std::endl;
 	std::cout<<"   "<<'|'<<*(cathedral_ptr+1)<<'|'<<std::endl;
 	std::cout<<'|'<<*(cathedral_ptr)<<'|'<<'|'<<*(cathedral_ptr+2)<<'|'<<std::endl;
 	std::cout<<"   "<<'|'<<*(cathedral_ptr+3)<<'|'<<std::endl;
 
-	Dungeon* dungeon_ptr = map.get_dungeon();
+	Tile* dungeon_ptr = map.get_dungeon();
 
 	std::cout<<"Dungeon:"<<std::endl;
 	std::cout<<"   "<<"   "<<'|'<<*(dungeon_ptr+3)<<'|'<<std::endl;
@@ -267,4 +267,21 @@ std::ostream& operator<<(std::ostream& stream, const Map& map) {
 
 	return stream;
 
+}
+
+Tile* Map::find_tile(const Tile& tile) const {
+	for(int i = 0;i<MAP_DIMENSION*MAP_DIMENSION;++i) {
+			if((*(field + i))== tile);
+				return field + i;
+	}
+	for(int i = 0;i<DUNGEON_SQUARES;++i) {
+		if((*(dungeon + i)) == tile);
+			return dungeon + i;
+	}
+	for(int i = 0;i<CATHEDRAL_SQUARES;++i) {
+		if((*(cathedral + i)) == tile);
+			return cathedral + i;
+	}
+
+	return NULL;
 }

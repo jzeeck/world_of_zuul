@@ -6,6 +6,8 @@
 #include "../Items/item.h"
 #include "../Map/Tiles/tile.h"
 
+#define PALADIN_FACTION 0
+
 class NPC {
 protected:
 	int faction;
@@ -19,8 +21,10 @@ public:
 	~NPC();
 	bool is_dead(void);
 	virtual void walk(void);
-	virtual unsigned int do_attack(void);
+	virtual unsigned int do_attack(void) const;
 	virtual void get_damage(int);
+	Tile& get_current_tile(void) const;
+	std::string get_name(void) const;
 };
 
 #endif /* NPC_H_ */

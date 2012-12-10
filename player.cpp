@@ -34,6 +34,6 @@ bool Player::move(std::string dir) {
 	return true;
 }
 
-Tile * Player::get_current_tile() const{
-	return current_tile;
+Tile& Player::get_current_tile(void) const{
+	return *current_tile;
 }
