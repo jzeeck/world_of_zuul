@@ -63,6 +63,6 @@ unsigned int Paladin::do_attack(void) const{
 
 bool Paladin::get_damage(int dmg) {
 	hp -= dmg;
-	return is_alive();
+	return is_dead();
 	//TODO
 } 
