@@ -8,7 +8,7 @@ Paladin::Paladin(std::string p_name, int p_hp, Tile* tile) : NPC(p_name, p_hp, t
 	//TODO equip paladin with gear that he drops
 }
 
-void Paladin::walk(void) {
+void Paladin::walk(Player& player) {
 	std::string directions;
 	current_tile->get_valid_directions(directions);
 	std::istringstream iss(directions);
@@ -41,7 +41,7 @@ void Paladin::walk(void) {
 
 void Paladin::action(Player& player) {
 	if(!(player.get_current_tile()==(*current_tile))) {
-		walk();
+		walk(player);
 	}
 }
 void Paladin::talk(Player& player) {
@@ -58,7 +58,17 @@ void Paladin::talk(Player& player) {
 }
 
 unsigned int Paladin::do_attack(void) const{
-	return 10000000;
+	if(!has_talked_to_player)
+		return 10000000;
+	return 300;
+}
+bool Paladin::get_attacked(Player& player) {
+	get_damage(player.do_damage());
+	if(is_dead())
+		return is_dead();
+	player.get_damage(do_attack());
+	return false;
+
 }
 
 bool Paladin::get_damage(int dmg) {

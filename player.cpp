@@ -40,7 +40,7 @@ Tile& Player::get_current_tile(void) const{
 	return *current_tile;
 }
 bool Player::is_alive(void) const {
-	if(l_hp<0) {
+	if(l_hp<=0) {
 		return false;
 	}
 	return true;

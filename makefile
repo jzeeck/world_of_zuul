@@ -45,7 +45,7 @@ swamp: swamp
 
 
 
-npc: NPC/npc.cpp NPC/npc.h paladin troll
+npc: NPC/npc.cpp NPC/npc.h paladin troll swamptroll skeleton skeletonking
 	$(CC) NPC/npc.cpp $(CFLAGS) -o npc.o -c
 
 paladin: NPC/paladin.cpp NPC/paladin.h
@@ -53,4 +53,13 @@ paladin: NPC/paladin.cpp NPC/paladin.h
 
 troll: NPC/troll.cpp NPC/troll.h
 	$(CC) NPC/troll.cpp $(CFLAGS) -o troll.o -c
+
+swamptroll: NPC/swamp_troll.cpp NPC/swamp_troll.h
+	$(CC) NPC/swamp_troll.cpp $(CFLAGS) -o swamp_troll.o -c
+
+skeleton: NPC/skeleton.cpp NPC/skeleton.h
+	$(CC) NPC/skeleton.cpp $(CFLAGS) -o skeleton.o -c
+
+skeletonking: NPC/skeleton_king.cpp NPC/skeleton_king.h
+	$(CC) NPC/skeleton_king.cpp $(CFLAGS) -o skeleton_king.o -c
 

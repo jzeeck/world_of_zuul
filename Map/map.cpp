@@ -230,6 +230,13 @@ Tile* Map::get_cathedral() const{
 Tile* Map::get_field() const {
 	return field;
 }
+Tile* Map::get_swamp_troll_start(void) const {
+	return (field+4);
+}
+Tile* Map::get_skeleton_king_start(void) const {
+	return (field+DUNGEON_SQUARES);
+}
+
 bool Map::is_dungeon_unlocked(void) {
 	return dungeon_is_unlocked;
 }
@@ -237,6 +244,7 @@ bool Map::is_dungeon_unlocked(void) {
 void Map::unlock_dungeon(void) {
 	dungeon_is_unlocked = true;
 }
+
 
 std::ostream& operator<<(std::ostream& stream, const Map& map) {
 

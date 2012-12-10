@@ -1,8 +1,5 @@
 #include <iostream>
 #include "zuul.h"
-#include "Map/map.h"
-#include "Commands/command.h"
-#include "Commands/game_command.h"
 
 //define used variables
 #define MAX_BYTES 101
@@ -44,7 +41,9 @@ int Zuul::run(int argc, char** argv) {
 		if(next_turn){
 
 			next_turn = false;
+			//std::cout<<"debugg starting npc action"<<std::endl;
 			npc_action();
+			//std::cout<<"debugg finished npc action"<<std::endl;
 			if(is_end_of_game())
 				continue;
 			look(g_commands);
@@ -106,6 +105,8 @@ void Zuul::init_program_commands(void) {
 	g_command_vector.push_back(new GameCommand<void (Zuul::*)(std::vector<std::string>& commands), Zuul*>(s, &Zuul::go, this));
 	s = "look";
 	g_command_vector.push_back(new GameCommand<void (Zuul::*)(std::vector<std::string>& commands), Zuul*>(s, &Zuul::look, this));
+	s = "attack";
+	g_command_vector.push_back(new GameCommand<void (Zuul::*)(std::vector<std::string>& commands), Zuul*>(s, &Zuul::attack, this));
 	s = "talk";
 	g_command_vector.push_back(new GameCommand<void (Zuul::*)(std::vector<std::string>& commands), Zuul*>(s, &Zuul::talk, this));
 	s = "quit";
@@ -146,13 +147,45 @@ void Zuul::go(std::vector<std::string>& commands) {
 }
 
 void Zuul::look(std::vector<std::string>& commands) {
+	bool found_something = false;
 	auto it = g_npc_vector.begin();
 	while(it != g_npc_vector.end()) {
 		Tile temp_tile = (*it)->get_current_tile();
 		if(temp_tile == g_player->get_current_tile()){
 			std::cout<<"There is a "<<(*it)->get_name()<<" close to you."<<std::endl;
+			found_something = true;
 		}
 		++it;
+	}
+	if(!found_something)
+		std::cout<<"There is nothing special around you."<<std::endl;
+}
+
+void Zuul::attack(std::vector<std::string>& commands) {
+	bool attacked = false;
+	next_turn = true;
+	auto it = g_npc_vector.begin();
+	while(it != g_npc_vector.end()) {
+		Tile temp_tile = (*it)->get_current_tile();
+		if(temp_tile == g_player->get_current_tile()){
+			attacked = true;
+			if((*it)->get_attacked(*g_player)) {
+				NPC* npc_p = (*it);
+				std::cout<<"You have killed "<<npc_p->get_name()<<"!"<<std::endl;
+				g_npc_vector.erase(it);
+				//std::cout<<"debugg1"<<std::endl;
+				delete npc_p;
+				//std::cout<<"debugg2"<<std::endl;
+				--it;
+				//std::cout<<"debugg3"<<std::endl;
+			} else {
+				std::cout<<"You have injured "<<(*it)->get_name()<<"!"<<std::endl;
+			}
+		}
+		++it;
+	}
+	if(!attacked) {
+		std::cout<<"There was no one to attack!"<<std::endl;
 	}
 }
 void Zuul::info(std::vector<std::string>& commands) {
@@ -210,6 +243,7 @@ void Zuul::exec_command(void) {
 		//g_commands.erase(g_commands.begin());
 		//std::cout << "exec command!";
 		(*(*it)).execute(g_commands);
+		//std::cout<<"debugg executed the command"<<std::endl;
 
 		//std::cout << "finished exec command!";
 		//(this->*it->second)(g_commands);
@@ -263,9 +297,11 @@ void Zuul::print_input_error_msg(void) const {
 }
 void Zuul::npc_action(void) {
 	auto it = g_npc_vector.begin();
+
+	//std::cout<<"debugg looping over npc"<<std::endl;
 	while(it != g_npc_vector.end()) {
 		//debugg
-		//std::cout<<"started executing one action"<<std::endl;
+		//std::cout<<"debugg "<<(*it)->get_name()<<std::endl;
 		(*it)->action(*g_player);
 		it++;
 	}
@@ -285,9 +321,10 @@ void Zuul::init_npc(void) {
 	//paladin
 	g_npc_vector.push_back(new Paladin("Paladin Dicander", 2900, map->get_cathedral()));
 	//monsters
-	//troll
-
+	//trolls
 	g_npc_vector.push_back(new Troll("Troll Bert", 200, map->get_field()));
 	g_npc_vector.push_back(new Troll("Troll Bill", 200, map->get_field()));
 	g_npc_vector.push_back(new Troll("Troll Tom", 200, map->get_field()));
+	g_npc_vector.push_back(new SwampTroll("Swamp Troll Torog", 800, map->get_swamp_troll_start()));
+	//g_npc_vector.push_back(new SwampTroll("Skeleton King Baltatzis", 6000, map->get_skeleton_king_start()));
 }

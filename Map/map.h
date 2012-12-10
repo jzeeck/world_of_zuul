@@ -36,6 +36,8 @@ public:
 	Tile* get_dungeon(void) const;
 	Tile* get_cathedral(void) const;
 	Tile* get_field(void) const;
+	Tile* get_swamp_troll_start(void) const;
+	Tile* get_skeleton_king_start(void) const;
 
 	Tile* find_tile(const Tile& tile) const;
 

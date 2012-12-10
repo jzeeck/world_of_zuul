@@ -9,9 +9,15 @@
 #include "NPC/npc.h"
 #include "NPC/paladin.h"
 #include "NPC/troll.h"
+#include "NPC/swamp_troll.h"
+#include "NPC/skeleton.h"
+#include "NPC/skeleton_king.h"
 #include "player.h"
 #include <stdio.h>
 #include <string.h>
+#include "Map/map.h"
+#include "Commands/command.h"
+#include "Commands/game_command.h"
 
 class Zuul {
 private:
@@ -27,6 +33,7 @@ private:
 	void look(std::vector<std::string>& commands);
 	void talk(std::vector<std::string>& commands);
 	void info(std::vector<std::string>& commands);
+	void attack(std::vector<std::string>& commands);
 	void print_valid_commands(void) const;
 	void print_valid_directions(void) const;
 	void exec_command(void);
