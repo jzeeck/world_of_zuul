@@ -8,6 +8,7 @@
 #include "Commands/command.h"
 #include "NPC/npc.h"
 #include "NPC/paladin.h"
+#include "NPC/troll.h"
 #include "player.h"
 #include <stdio.h>
 #include <string.h>
@@ -24,6 +25,8 @@ private:
 	void quit(std::vector<std::string>& commands);
 	void go(std::vector<std::string>& commands);
 	void look(std::vector<std::string>& commands);
+	void talk(std::vector<std::string>& commands);
+	void info(std::vector<std::string>& commands);
 	void print_valid_commands(void) const;
 	void print_valid_directions(void) const;
 	void exec_command(void);
@@ -32,6 +35,7 @@ private:
 	void get_adventurer_name(void);
 	void npc_action(void);
 	void init_npc(void);
+	bool is_end_of_game(void);
 
 	std::vector<std::string> split(const std::string& strValue, char separator);
 	static bool g_quit;

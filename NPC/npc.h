@@ -8,6 +8,7 @@
 #include "../Map/Tiles/tile.h"
 
 #define PALADIN_FACTION 0
+#define SWAMP_FACTION 1
 
 class NPC {
 protected:
@@ -22,9 +23,10 @@ public:
 	~NPC();
 	bool is_dead(void);
 	virtual void walk(void);
-	virtual void action(const Player& player);
+	virtual void talk(Player& player);
+	virtual void action(Player& player);
 	virtual unsigned int do_attack(void) const;
-	virtual void get_damage(int);
+	virtual bool get_damage(int);
 	Tile& get_current_tile(void) const;
 	std::string get_name(void) const;
 };

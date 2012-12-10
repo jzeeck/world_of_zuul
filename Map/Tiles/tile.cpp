@@ -31,20 +31,23 @@ void Tile::init_directions() {
 	directions.insert(std::pair<std::string, Tile* (Tile::*)() const>("north", &Tile::get_north));
 }
 
-std::string Tile::get_valid_directions(void) const{
-	std::string return_string = "";
+void Tile::get_valid_directions(std::string& ans) const{
+	//std::cout<<"Tile index: "<<number<<std::endl;
+	ans = "";
 	auto it = string_direction.begin();
 	while(it != string_direction.end()) {
+		//std::cout<<"dir: "<<*it<<std::endl;
 		auto it2 = directions.find(*it);
 		if(it2 != directions.end()) {
 			Tile * tile_ptr = (this->*((*it2).second))();
 			if(NULL != tile_ptr){
-				return_string.append(*it).append(" ");
+				//std::cout<<"valid dir: "<<*it<<std::endl;
+				ans.append(*it).append(" ");
 			}
 		}
 		++it;
 	}
-	return return_string;
+	//std::cout<<"returning string: "<<ans<<std::endl;
 }
 
 //setters

@@ -41,7 +41,7 @@ public:
 	Tile* get_west(void) const;
 	Tile* get_east(void) const;
 	Tile* get_direction(std::string) const;
-	std::string get_valid_directions(void) const;
+	void get_valid_directions(std::string& ans) const;
 	bool isExplored(void) const;
 	void explore(void);
 	//print

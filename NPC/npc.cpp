@@ -18,16 +18,21 @@ bool NPC::is_dead(void) {
 void NPC::walk(void) {
 
 }
-void NPC::action(const Player& player) {
-	
+void NPC::action(Player& player) {
+
+}
+
+void NPC::talk(Player& player) {
+
 }
 
 unsigned int NPC::do_attack(void) const{
 	return 1;
 }
 
-void NPC::get_damage(int dmg) {
+bool NPC::get_damage(int dmg) {
 	hp -= dmg;
+	return is_dead();
 }
 Tile& NPC::get_current_tile(void) const {
 	return *current_tile;

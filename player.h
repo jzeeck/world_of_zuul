@@ -8,33 +8,38 @@
 class Player {
 private:
 	std::string l_name;
-	const static unsigned int max_number_of_items = 8;
+	//const static unsigned int max_number_of_items = 8;
 
 	Tile* current_tile;
 
-	int l_strength;
+	/*int l_strength;
 	int l_dexterity;
 	int l_vitality;
 
-	int l_experience;
+	int l_experience;*/
 	int l_hp;
+	bool has_talked_to_paladin;
 
-	Item* l_head_gear;
+	/*Item* l_head_gear;
 	Item* l_wepond;
 	Item* l_shield;
 	Item* l_chest;
 	Item* l_gloves;
 	Item* l_boots;
 
-	Item* l_inventory[8];
+	Item* l_inventory[8];*/
 public:
-	int get_max_number_of_items();
 	void set_name(std::string var);
 	Player();
 	Player(Tile*);
 	~Player();
 	bool move(std::string);
-	Tile& get_current_tile(void)const;
+	Tile& get_current_tile(void) const;
+	bool is_alive(void) const;
+	bool get_damage(unsigned int dmg);
+	int get_hp(void);
+	unsigned int do_damage(void);
+	void talked_to_paladin(void);
 };
 
 #endif /* PLAYER_H_ */

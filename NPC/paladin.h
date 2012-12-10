@@ -9,14 +9,16 @@
 
 class Paladin  : public NPC {
 private:
+	bool has_talked_to_player;
 
 public:
 	Paladin(std::string p_name, int p_hp, Tile* tile);
 	~Paladin();
 	virtual void walk(void);
+	virtual void talk(Player& player);
 	virtual unsigned int do_attack(void) const;
-	virtual void action(const Player& player);
-	virtual void get_damage(int);
+	virtual void action(Player& player);
+	virtual bool get_damage(int);
 };
 
 #endif /* PALADIN_H_ */

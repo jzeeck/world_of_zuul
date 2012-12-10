@@ -45,9 +45,12 @@ swamp: swamp
 
 
 
-npc: NPC/npc.cpp NPC/npc.h paladin
+npc: NPC/npc.cpp NPC/npc.h paladin troll
 	$(CC) NPC/npc.cpp $(CFLAGS) -o npc.o -c
 
 paladin: NPC/paladin.cpp NPC/paladin.h
 	$(CC) NPC/paladin.cpp $(CFLAGS) -o paladin.o -c
+
+troll: NPC/troll.cpp NPC/troll.h
+	$(CC) NPC/troll.cpp $(CFLAGS) -o troll.o -c
 
