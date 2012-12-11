@@ -12,7 +12,7 @@ public:
 	// Constructors
 	// Armor(const std::string name);
 	Armor(const std::string name, const int protection, const std::string type_of_armor);
-
+	~Armor(){};
 	// functions
 	int get_protection(void) const;
 	void set_protection(int);

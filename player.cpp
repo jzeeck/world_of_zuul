@@ -1,6 +1,6 @@
 #include "player.h"
 Player::Player(){
-	init_start_items();
+	// init_start_items();
 }
 Player::Player(Tile* tile) {
 	current_tile = tile;
@@ -86,7 +86,7 @@ int Player::get_protection(){
 	protection += l_chest->get_protection();
 	protection += l_boots->get_protection();
 	protection += l_gloves->get_protection();
-	l_shield += l_gloves->get_protection();
+	protection += l_shield->get_protection();
 	return protection;
 }
 
