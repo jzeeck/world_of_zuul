@@ -18,9 +18,18 @@ commands:
 player: item
 	$(CC) $(CFLAGS) -c player.cpp -o player.o
 
-item: Items/item.cpp Items/item.h
+
+item: armor weapon consumable Items/item.cpp Items/item.h
 	$(CC) $(CFLAGS) -c Items/item.cpp -o item.o
 
+armor: Items/armor.cpp Items/armor.h
+	$(CC) $(CFLAGS) -c Items/armor.cpp -o armor.o
+
+weapon: Items/weapon.cpp Items/weapon.h
+	$(CC) $(CFLAGS) -c Items/weapon.cpp -o weapon.o
+
+consumable: Items/consumable.cpp Items/consumable.h
+	$(CC) $(CFLAGS) -c Items/consumable.cpp -o consumable.o
 
 
 
