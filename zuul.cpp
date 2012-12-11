@@ -183,6 +183,9 @@ void Zuul::attack(std::vector<std::string>& commands) {
 				//std::cout<<"debugg2"<<std::endl;
 				--it;
 				//std::cout<<"debugg3"<<std::endl;
+				Consumable * potion = new Consumable("Small health potion","CONSUMABLE_HP",2000);
+				std::cout << "You picked up a " << potion->get_name() << std::endl;
+				g_player->pickup_consumable(potion);
 			} else {
 				std::cout<<"You have injured "<<(*it)->get_name()<<"!"<<std::endl;
 			}
