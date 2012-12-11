@@ -17,7 +17,7 @@ void SwampTroll::walk(Player& player) {
 	}
 	std::string directions;
 	current_tile->get_valid_directions(directions);
-	std::cout << "got direction: "<<directions<< std::endl;
+	//std::cout << "got direction: "<<directions<< std::endl;
 	std::istringstream iss(directions);
 	//std::cout << "starting split"<< std::endl;
 

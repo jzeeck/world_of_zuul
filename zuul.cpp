@@ -135,10 +135,10 @@ void Zuul::print_valid_directions(void) const {
 void Zuul::go(std::vector<std::string>& commands) {
 	if(commands.size() != 2){
 		print_input_error_msg();
+		return;
 	}
 	if(!g_player->move(commands[1])) {
 		std::cout<<'"'<<commands[1]<<'"'<<" is not a valid direction."<<std::endl;
-		
 	}
 	else {
 		next_turn = true;
@@ -327,5 +327,5 @@ void Zuul::init_npc(void) {
 	g_npc_vector.push_back(new Troll("Troll Tom", 200, map->get_field()));
 	g_npc_vector.push_back(new SwampTroll("Swamp Troll Torog", 800, map->get_swamp_troll_start()));
 
-	g_npc_vector.push_back(new SkeletonKing("Skeleton King Baltatzis", 6000, map->get_skeleton_king_start()));
+	g_npc_vector.push_back(new SkeletonKing("Skeleton King Baltatzis", 6000, (map->get_dungeon()+6)));
 }

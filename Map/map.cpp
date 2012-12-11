@@ -183,7 +183,8 @@ void Map::link_dungeon(void) {
 	(ptr+3)->set_south(*(ptr+2));
 	(ptr+4)->set_south(*(ptr+5));
 
-	(ptr+5)->set_west(*(ptr+4));
+	(ptr+6)->set_west(*(ptr+4));
+	//(ptr+5)->set_west(*(ptr+4));
 	(ptr+4)->set_west(*(ptr+2));
 	(ptr+2)->set_west(*(ptr+1));
 	(ptr+1)->set_west(*(ptr+0));
@@ -234,7 +235,7 @@ Tile* Map::get_swamp_troll_start(void) const {
 	return (field+4);
 }
 Tile* Map::get_skeleton_king_start(void) const {
-	return (field+DUNGEON_SQUARES);
+	return (field+DUNGEON_SQUARES-1);
 }
 
 bool Map::is_dungeon_unlocked(void) {

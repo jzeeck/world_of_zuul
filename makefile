@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -std=c++0x -Wall -DDEBUGG
+CFLAGS = -std=c++0x -Wall 
 
 
 
