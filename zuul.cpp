@@ -210,8 +210,18 @@ void Zuul::inventory(std::vector<std::string>& commands) {
 
 void Zuul::use_consumable(std::vector<std::string>& commands) {
 	if(commands.size() == 2){
-		int nr = atoi(commands[1].c_str());
-		g_player->use_consumable(nr);
+		// int nr = atoi(commands[1].c_str());
+		std::istringstream iss(commands[1]);
+   		int obj;
+
+   		iss >> std::ws >> obj >> std::ws;
+
+   		if(iss.eof()){
+    		g_player->use_consumable(obj);
+		// g_player->use_consumable(obj);
+    	}else{
+    		std::cout << "Input was not a number" << std::endl;
+    	}
 	}
 }
 
