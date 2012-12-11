@@ -134,6 +134,7 @@ void Player::use_consumable(unsigned int index){
 		if(iter == index && it != l_consumables.end()){
 			if( (*it)->get_type().compare("CONSUMABLE_HP")){
 				l_hp += (*it)->get_consumable_grade();
+				delete (*it);
 				l_consumables.erase(it);
 			}
 		}		
