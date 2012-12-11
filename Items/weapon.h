@@ -12,6 +12,7 @@ public:
 	// Constructors
 	// Weapon(const std::string name);
 	Weapon(const std::string name, const int damage);
+	~Weapon(){};
 
 	// functions
 	int get_damage(void) const;
