@@ -31,6 +31,7 @@ public:
 	virtual unsigned int do_attack(void) const;
 	virtual bool get_damage(int);
 	virtual bool get_attacked(Player& player);
+	virtual bool is_skeleton_king() const;
 	Tile& get_current_tile(void) const;
 	std::string get_name(void) const;
 };

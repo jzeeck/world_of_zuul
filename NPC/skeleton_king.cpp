@@ -27,3 +27,6 @@ void SkeletonKing::talk(Player& player) {
 unsigned int SkeletonKing::do_attack(void) const {
 	return 700;
 }
+bool SkeletonKing::is_skeleton_king() const {
+	return true;
+}

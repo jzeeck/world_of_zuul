@@ -140,10 +140,10 @@ void Zuul::print_valid_directions(void) const {
 void Zuul::go(std::vector<std::string>& commands) {
 	if(commands.size() != 2){
 		print_input_error_msg();
+		return;
 	}
 	if(!g_player->move(commands[1])) {
 		std::cout<<'"'<<commands[1]<<'"'<<" is not a valid direction."<<std::endl;
-		
 	}
 	else {
 		next_turn = true;
@@ -178,6 +178,10 @@ void Zuul::attack(std::vector<std::string>& commands) {
 				NPC* npc_p = (*it);
 				std::cout<<"You have killed "<<npc_p->get_name()<<"!"<<std::endl;
 				g_npc_vector.erase(it);
+				if(npc_p->is_skeleton_king()) {
+					std::cout<<"You won the game!"<<std::endl;
+					quit(commands);
+				}
 				//std::cout<<"debugg1"<<std::endl;
 				delete npc_p;
 				//std::cout<<"debugg2"<<std::endl;
@@ -347,11 +351,9 @@ bool Zuul::is_end_of_game(void) {
 		g_quit = true;
 		std::cout<<"You have died! And lost the game!"<<std::endl;
 		std::cout<<"Better luck next time."<<std::endl;
-		return true;
-	}
-	//todo win scenario
 
-	return false;
+	}
+	return g_quit;
 }
 void Zuul::init_npc(void) {
 	//paladin
@@ -363,5 +365,5 @@ void Zuul::init_npc(void) {
 	g_npc_vector.push_back(new Troll("Troll Tom", 200, map->get_field()));
 	g_npc_vector.push_back(new SwampTroll("Swamp Troll Torog", 800, map->get_swamp_troll_start()));
 
-	g_npc_vector.push_back(new SkeletonKing("Skeleton King Baltatzis", 6000, map->get_skeleton_king_start()));
+	g_npc_vector.push_back(new SkeletonKing("Skeleton King Baltatzis", 6000, (map->get_dungeon()+6)));
 }

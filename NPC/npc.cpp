@@ -26,6 +26,10 @@ void NPC::talk(Player& player) {
 
 }
 
+bool NPC::is_skeleton_king() const {
+	return false;
+}
+
 bool NPC::get_attacked(Player& player) {
 	return get_damage(player.do_damage());
 }
