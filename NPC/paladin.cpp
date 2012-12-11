@@ -50,6 +50,8 @@ void Paladin::talk(Player& player) {
 		std::cout << "You talked to " <<get_name()<<"."<< std::endl;
 		std::cout << "He gave you a sword to defeat the Skeleton King!"<< std::endl;
 		player.talked_to_paladin();
+		Weapon * weapon = new Weapon("Skeleton King Killer",5000);
+		player.equip_weapon(weapon);
 		has_talked_to_player = true;
 	} else {
 		std::cout << get_name()<<" has nothing more to say to you."<< std::endl;
