@@ -120,6 +120,12 @@ void Zuul::init_program_commands(void) {
 	g_command_vector.push_back(new GameCommand<void (Zuul::*)(std::vector<std::string>& commands), Zuul*>(s, &Zuul::print_map, this));
 	s = "info";
 	g_command_vector.push_back(new GameCommand<void (Zuul::*)(std::vector<std::string>& commands), Zuul*>(s, &Zuul::info, this));
+	s = "equipped";
+	g_command_vector.push_back(new GameCommand<void (Zuul::*)(std::vector<std::string>& commands), Zuul*>(s, &Zuul::equipped, this));
+	s = "inventory";
+	g_command_vector.push_back(new GameCommand<void (Zuul::*)(std::vector<std::string>& commands), Zuul*>(s, &Zuul::inventory, this));
+	s = "use_consumable";
+	g_command_vector.push_back(new GameCommand<void (Zuul::*)(std::vector<std::string>& commands), Zuul*>(s, &Zuul::use_consumable, this));
 	/*g_commad_map.insert(std::pair<std::string, void (Zuul::*)(std::vector<std::string> commands)>("quit", &Zuul::quit));
 	g_commad_map.insert(std::pair<std::string, 
 		void (Zuul::*)(std::vector<std::string> commands)>("help", &Zuul::print_help_msg));*/
@@ -191,6 +197,21 @@ void Zuul::info(std::vector<std::string>& commands) {
 	std::cout<<"Your health is "<<g_player->get_hp()<<" and you do "<< g_player->do_damage()<< " damage."<<std::endl;
 }
 
+void Zuul::equipped(std::vector<std::string>& commands) {
+	g_player->print_equipped();
+}
+
+void Zuul::inventory(std::vector<std::string>& commands) {
+	g_player->print_consumables();
+}
+
+void Zuul::use_consumable(std::vector<std::string>& commands) {
+	if(commands.size() == 2){
+		int nr = atoi(commands[1].c_str());
+		g_player->use_consumable(nr);
+	}
+}
+
 void Zuul::talk(std::vector<std::string>& commands) {
 	std::string input_name;
 	bool first = true;
@@ -220,9 +241,6 @@ void Zuul::quit(std::vector<std::string>& commands) {
 	g_quit = true;
 }
 
-void Zuul::pickup(std::vector<std::string>& commands) {
-	// TODO Ska man kunna plocka upp saker?
-}
 
 
 void Zuul::exec_command(void) {

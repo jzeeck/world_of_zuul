@@ -133,12 +133,16 @@ void Player::use_consumable(unsigned int index){
 		}
 		if(iter == index && it != l_consumables.end()){
 			if( (*it)->get_type().compare("CONSUMABLE_HP")){
+				std::cout << "You drank a: " << (*it)->get_name() << std::endl;
 				l_hp += (*it)->get_consumable_grade();
 				delete (*it);
 				l_consumables.erase(it);
+				return;
 			}
-		}		
+		}	
 	}
+	std::cout << "You don't have a consumable with that number" << std::endl;
+
 }
 
 
@@ -150,9 +154,12 @@ void Player::init_start_items(){
 	Armor * boots = new Armor("Powerfull boots of C++",30,"ARMOR_BOOTS");
 	Armor * shield = new Armor("Powerfull shield of C++",50,"ARMOR_SHIELD");
 	Armor * gloves = new Armor("Powerfull gloves of C++",30,"ARMOR_GLOVES");
-	Consumable * potion = new Consumable("Small health potion","CONSUMABLE_HP",2000);
-	
-	pickup_consumable(potion);
+	Consumable * potion1 = new Consumable("Small health potion","CONSUMABLE_HP",2000);
+	Consumable * potion2 = new Consumable("Small health potion","CONSUMABLE_HP",2000);
+
+	pickup_consumable(potion1);
+	pickup_consumable(potion2);
+
 	l_weapon = weapon;
 	l_head_gear = headgear;
 	l_chest = chestplate;

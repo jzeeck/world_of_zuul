@@ -35,7 +35,9 @@ private:
 	void info(std::vector<std::string>& commands);
 	void attack(std::vector<std::string>& commands);
 
-	void pickup(std::vector<std::string>& commands);
+	void equipped(std::vector<std::string>& commands);
+	void inventory(std::vector<std::string>& commands);
+	void use_consumable(std::vector<std::string>& commands);
 
 	void print_valid_commands(void) const;
 	void print_valid_directions(void) const;
