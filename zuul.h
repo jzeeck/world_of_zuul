@@ -34,6 +34,9 @@ private:
 	void talk(std::vector<std::string>& commands);
 	void info(std::vector<std::string>& commands);
 	void attack(std::vector<std::string>& commands);
+
+	void pickup(std::vector<std::string>& commands);
+
 	void print_valid_commands(void) const;
 	void print_valid_directions(void) const;
 	void exec_command(void);

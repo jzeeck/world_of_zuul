@@ -123,7 +123,6 @@ void Zuul::init_program_commands(void) {
 	/*g_commad_map.insert(std::pair<std::string, void (Zuul::*)(std::vector<std::string> commands)>("quit", &Zuul::quit));
 	g_commad_map.insert(std::pair<std::string, 
 		void (Zuul::*)(std::vector<std::string> commands)>("help", &Zuul::print_help_msg));*/
-	
 }
 
 void Zuul::print_valid_directions(void) const {
@@ -220,6 +219,12 @@ void Zuul::talk(std::vector<std::string>& commands) {
 void Zuul::quit(std::vector<std::string>& commands) {
 	g_quit = true;
 }
+
+void Zuul::pickup(std::vector<std::string>& commands) {
+	// TODO Ska man kunna plocka upp saker?
+}
+
+
 void Zuul::exec_command(void) {
 	std::string input = g_input;
 
