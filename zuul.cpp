@@ -173,6 +173,10 @@ void Zuul::attack(std::vector<std::string>& commands) {
 				NPC* npc_p = (*it);
 				std::cout<<"You have killed "<<npc_p->get_name()<<"!"<<std::endl;
 				g_npc_vector.erase(it);
+				if(npc_p->is_skeleton_king()) {
+					std::cout<<"You won the game!"<<std::endl;
+					quit(commands);
+				}
 				//std::cout<<"debugg1"<<std::endl;
 				delete npc_p;
 				//std::cout<<"debugg2"<<std::endl;
@@ -311,11 +315,9 @@ bool Zuul::is_end_of_game(void) {
 		g_quit = true;
 		std::cout<<"You have died! And lost the game!"<<std::endl;
 		std::cout<<"Better luck next time."<<std::endl;
-		return true;
-	}
-	//todo win scenario
 
-	return false;
+	}
+	return g_quit;
 }
 void Zuul::init_npc(void) {
 	//paladin

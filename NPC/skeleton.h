@@ -13,6 +13,7 @@ public:
 	virtual void talk(Player& player);
 	virtual unsigned int do_attack(void) const;
 	virtual void action(Player& player);
+	virtual bool is_skeleton_king() const;
 };
 
 #endif /* SKELETON_H_ */
